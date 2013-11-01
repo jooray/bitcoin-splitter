@@ -22,7 +22,9 @@ end
 address_to_split=ARGV.shift
 address_1=ARGV.shift
 address_2=ARGV.shift
-fee=(ARGV.shift || 0.0001).to_f
+# this is not the fee that is going to be paid, but maximum expected fee
+# we let the client calculate the fee
+fee=(ARGV.shift || 0.0010).to_f
 
 begin
 				addrbalance=JSON.parse(electrum("getaddressbalance",address_to_split))
