@@ -15,7 +15,7 @@ end
 
 
 if ARGV.size < 3
-	puts "Usage: splitter.rb addresstosplit destinationaddr1 destinationaddr2 [fee]"
+	puts "Usage: splitter.rb addresstosplit destinationaddr1 destinationaddr2 [maximumexpectedfee]"
   exit
 end
 
@@ -29,11 +29,13 @@ begin
 				unconfirmed=addrbalance["unconfirmed"]
 				# we want transactions to be confirmed before continuing
 				if unconfirmed.nil? or unconfirmed=="0"
-								balance=addrbalance["confirmed"].to_f
+								# we let the client calculate the fee, as we don't know the size of transaction
+								# "fee" is maximum expected fee
+								balance=addrbalance["confirmed"].to_f-fee
 
 								if balance>0.0
 									amount=(balance-fee)/2
-									electrum("paytomany","-f",fee.to_s,"-F",address_to_split,address_1,amount.to_s,address_2,amount.to_s)
+									electrum("paytomany","-F",address_to_split,address_1,amount.to_s,address_2,amount.to_s)
 								end
 				end
 
