@@ -12,7 +12,7 @@ This script uses only standard library and calls command line electrum client. I
 
 No race conditions were tested for, as both destination addresses are friendly in my use-case. Please note that it splits balance from ALL ADDRESSES in the wallet, so please do not use the wallet for other purposes. I run it as a separate user in my system with their own wallet.
 
-Electrum has to be 1.9 (current development version as time of this writing), because 1.8.1 does not understand paytomany command. We want to have both destination addresses in one transaction to make any race conditions or electrum run errors easier to handle.
+Electrum has to be 1.9.4 or later, because 1.8.x versions do not understand paytomany command. We want to have both destination addresses in one transaction to make any race conditions or electrum run errors easier to handle.
 
 Usage
 -----
